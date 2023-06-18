@@ -1,0 +1,92 @@
+body {
+  padding: 0;
+  margin: 0;
+  font-family: sans-serif;
+  font-family: "Roboto", sans-serif;
+  font-family: "Poppins", sans-serif;
+  display: grid;
+  place-items: center;
+}
+
+.search_filter {
+    margin-right: 90px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  justify-self: end;
+}
+
+#search-form input[type="text"] {
+  font-size: 15px;
+  font-weight: 500;
+  font-family: "Roboto", sans-serif;
+  font-family: "Poppins", sans-serif;
+  box-sizing: border-box;
+}
+#search-form input[type="text"]:focus {
+  outline: 2px solid #ff9100;
+}
+
+#search-form input[type="text"],
+#search-form button {
+  border: 1px solid #ff9900;
+  border-radius: 5px;
+  padding: 0.6em 1.2em;
+}
+#search-form button {
+  font-size: 1em;
+  color: white;
+  background-color: #ff9900;
+}
+
+.project-detail {
+  text-align: center;
+}
+
+.project-detail div {
+  margin: 1rem;
+  border-radius: 10px;
+  width: 1200px;
+  background-color: #ff9900;
+}
+
+.project-detail div h1 {
+  text-shadow: 2px 1px 1px white;
+}
+
+.project-detail div .desc {
+  color: #303030;
+}
+
+.project-detail div .author-name {
+  border-top-right-radius: 10px;
+  border-top-left-radius: 10px;
+  margin: auto;
+  padding: 0.5em 1em;
+  width: max-content;
+  background-color: white;
+  color: #ff9100;
+  font-weight: 500;
+}
+
+/* BUTTON */
+
+.btn {
+  position: fixed;
+  right: 20px;
+  bottom: 50px;
+}
+
+.btn a {
+  background-color: #0099ff;
+  border-radius: 5px;
+  width: fit-content;
+  padding: 1rem 1.2rem;
+  color: #d3d3d3;
+  text-decoration: none;
+}
+
+.btn a:hover {
+  color: #fff;
+  background-color: #006eff;
+}

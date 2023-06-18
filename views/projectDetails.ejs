@@ -1,0 +1,92 @@
+<link rel="stylesheet" href="../details.css" />
+
+<style>
+  .status {
+    padding: 5px 10px;
+    border-radius: 4px;
+  }
+
+  .status.open {
+    background-color: green;
+  }
+
+  .status.inprogress {
+    background-color: yellow;
+  }
+
+  .status.closed {
+    background-color: red;
+  }
+</style>
+<!-- projectDetail.ejs -->
+
+<div class="project-detail">
+  <div>
+    <h1><%= project.name %></h1>
+    <p class="desc"><%= project.description %></p>
+    <p class="author-name"><%= project.author %></p>
+  </div>
+</div>
+
+<!-- Search form -->
+<div class="search_filter">
+  <form
+    id="search-form"
+    action="/project/<%= project._id %>/search"
+    method="get"
+  >
+    <input
+      type="text"
+      name="query"
+      placeholder="Search by author or description"
+      required
+    />
+    <button type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
+  </form>
+
+  <!-- Filter Form -->
+  <form
+    id="filter-form"
+    action="/project/<%= project._id %>/filter"
+    method="GET"
+  >
+    <label for="filter-labels">Filter by Labels:</label>
+    <select name="labels" id="filter-labels">
+      <option value="">All</option>
+      <option value="bug">Bug</option>
+      <option value="documentation">Documentation</option>
+      <option value="enhancement">Enhancement</option>
+      <option value="good first issue">Good First Issue</option>
+      <option value="help wanted">Help Wanted</option>
+      <option value="question">Question</option>
+      <option value="invalid">Invalid</option>
+      <option value="wontfix">Won't Fix</option>
+    </select>
+    <button type="submit"><i class="fa-solid fa-filter"></i></button>
+  </form>
+
+  <!-- Existing code for displaying issues -->
+</div>
+
+<h2>Issues</h2>
+<hr style="width: 100%; color: rgb(255, 255, 255)" />
+<ul>
+  <% project.issues.forEach((issue) => { %>
+  <li>
+    <h3><%= issue.name %></h3>
+    <p>Description: <%= issue.description %></p>
+    <p>Author: <%= issue.author %></p>
+    <p>Labels: <%= issue.labels %></p>
+    <p>
+      Status:
+      <span class="status <%= issue.status.toLowerCase() %>"
+        ><%= issue.status %></span
+      >
+    </p>
+  </li>
+  <% }); %>
+</ul>
+
+<div class="btn">
+  <a href="/project/<%= project.id %>/issue_form">Create Issue</a>
+</div>

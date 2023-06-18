@@ -1,0 +1,44 @@
+<link rel="stylesheet" href="../home.css" />
+
+<div class="project-container">
+  <% for (const project of projects) { %>
+  <div class="project-detail">
+    <div class="project-author" title="Author">
+      <h2 class="author_name"><%= project.author %></h2>
+    </div>
+    <div class="project">
+      <div class="project-title">
+        <a href="<%= project._id %>"><%= project.name %></a>
+      </div>
+      <div class="project-description">
+        <p><%= project.description %></p>
+      </div>
+      <div class="del-btn-container">
+        <!-- <button id="deleteButton">
+          
+        </button> -->
+        <form action="/project/<%= project._id %>/delete" method="post">
+          <button type="submit"><i class="fa-solid fa-trash"></i></button>
+        </form>
+      </div>
+    </div>
+  </div>
+  <% } %>
+  <div id="ifEmptyProject" data-length="<%= projects.length %>">
+    <span>THERE ARE NO SUCH <span class="projectText">PROJECTS...</span></span>
+  </div>
+</div>
+
+<div class="btn">
+  <a href="/project/form">Create Project</a>
+</div>
+
+<script src="../js/index.js"></script>
+<script>
+  const ifEmptyProject = document.getElementById("ifEmptyProject");
+  const length = ifEmptyProject.getAttribute("data-length");
+
+  if (length <= 0) {
+    ifEmptyProject.style.display = "block";
+  }
+</script>
