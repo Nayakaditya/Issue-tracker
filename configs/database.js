@@ -1,6 +1,9 @@
 const mongoose = require("mongoose");
 
+// Taking mondodb uri from environment vairable
 const { MONGO_URI } = process.env;
+
+// connecting with mongodb db
 mongoose
   .connect(MONGO_URI, {
     maxPoolSize: 10,

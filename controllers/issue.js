@@ -12,7 +12,7 @@ module.exports.createIssue = async (req, res) => {
     const project = await Project.findById(projectId);
     if (!project) {
       console.log("Project not found");
-      res.redirect("/"); // Redirect to home page or appropriate error page
+      res.redirect("/project/home"); // Redirect to home page or appropriate error page
       return;
     }
 

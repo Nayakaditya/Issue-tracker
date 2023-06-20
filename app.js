@@ -16,6 +16,7 @@ const app = express();
 app.use(express.json());
 app.use(express.static("assets"));
 app.use(express.urlencoded({ extended: true }));
+// Using EJS here and setting the engine
 app.set("view engine", "ejs");
 app.set("views", "./views");
 app.use(expressEjsLayouts);
@@ -35,6 +36,7 @@ app.use(
   })
 );
 
+// ROUTERS ARE CALLS FROM HERE
 app.use("/project", projectRoute);
 app.use("/issue", issueRoute);
 

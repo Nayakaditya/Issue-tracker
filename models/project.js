@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 
+// Schema for a project containg required fields
 const projectSchema = new mongoose.Schema(
   {
     name: {

@@ -73,29 +73,28 @@ module.exports.getProjectDetails = async (req, res) => {
 
     if (!project) {
       console.log("Project not found");
-      res.redirect("/"); // Redirect to home page or appropriate error page
+      res.redirect("/project/home"); // Redirect to home page or appropriate error page
       return;
     }
 
     return res.render("projectDetails", { title: "project detail", project });
   } catch (err) {
     console.log("Error retrieving project details:", err);
-    res.redirect("/"); // Redirect to home page or appropriate error page
+    res.redirect("/project/home"); // Redirect to home page or appropriate error page
   }
 };
 
+// Controller for Searching the issues related to a project
 module.exports.searchIssues = async (req, res) => {
   try {
     const { projectId } = req.params;
     const keyword = req.query.query;
     const regex = new RegExp(keyword, "i");
 
-    const project = await Project.findById(projectId);
+    const project = await Project.findById(projectId); // first finding the exact project
 
     if (!project) {
-      res.json({
-        error: "Project not found",
-      });
+      console.log("Project not found");
       return;
     }
 
@@ -124,7 +123,7 @@ module.exports.searchIssues = async (req, res) => {
     });
   } catch (error) {
     console.log(error);
-    res.redirect("/"); // Redirect to home page or appropriate error page
+    res.redirect("/project/home"); // Redirect to home page or appropriate error page
   }
 };
 
@@ -144,7 +143,7 @@ module.exports.filterIssues = async (req, res) => {
 
     if (!project) {
       console.log("Project not found");
-      res.redirect("/"); // Redirect to home page or appropriate error page
+      res.redirect("back"); // Redirect to home page or appropriate error page
       return;
     }
 
@@ -152,6 +151,6 @@ module.exports.filterIssues = async (req, res) => {
     res.render("projectDetails", { project, title: "filtered issues" });
   } catch (err) {
     console.log("Error retrieving project details:", err);
-    res.redirect("/");
+    res.redirect(`/project/${projectId}`);
   }
 };
