@@ -28,5 +28,6 @@ router.get("/:projectId/issue_form", projectController.createIssueForm);
 // Router for Search Issues
 router.get("/:projectId/search", projectController.searchIssues);
 
+// Router for Filter Issues
 router.get("/:projectId/filter", projectController.filterIssues);
 module.exports = router;

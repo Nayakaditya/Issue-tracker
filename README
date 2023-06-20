@@ -1,0 +1,50 @@
+#Issue Tracker
+
+## Issue tracker project made up of frontend and backend technologies like, EJS, CSS, JAVASCRIPT, NodeJS, ExpressJS, MongoDB, is a application where you can create/add project and further if any issue related to the project then you can also create/add/label issue/issues to it.
+
+- TECHNOLOGIES
+
+* FRONTEND
+  > EJS (HTML)
+  > CSS
+  > JAVASCRIPT
+* BACKEND
+  > NODEJS
+  > EXPRESSJS
+  > MONGODB
+
+- ROUTES
+
+ * PROJECTS
+ 
+  > Home page route
+  > router.get("/home");
+  
+  > Issue form page route
+  > router.get("/:projectId/issue/form");
+  
+  > Project form page route
+  > router.get("/form");
+  
+  > Single project details route
+  > router.get("/:projectId");
+  
+  > Project creation route
+  > router.post("/create");
+  
+  > elete Single Project
+  > router.post("/:projectId/delete");
+  
+  > Route for page issue form
+  > router.get("/:projectId/issue_form");
+  
+  > Router for Search Issues
+  > router.get("/:projectId/search");
+  
+  > Router for Filter Issues
+  > router.get("/:projectId/filter");
+ 
+ * ISSUES
+ 
+  > Create an issue
+  > router.post("/:projectId/issue/create");
