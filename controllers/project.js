@@ -128,7 +128,6 @@ module.exports.searchIssues = async (req, res) => {
   }
 };
 
-
 // Get project details and apply filters
 module.exports.filterIssues = async (req, res) => {
   const projectId = req.params.projectId;
@@ -150,7 +149,7 @@ module.exports.filterIssues = async (req, res) => {
     }
 
     console.log("Filtered issues:", project.issues);
-    res.render("projectDetails", { project, title : "filtered issues" });
+    res.render("projectDetails", { project, title: "filtered issues" });
   } catch (err) {
     console.log("Error retrieving project details:", err);
     res.redirect("/");

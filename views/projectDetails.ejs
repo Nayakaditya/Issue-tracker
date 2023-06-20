@@ -1,6 +1,315 @@
-<link rel="stylesheet" href="../details.css" />
 <!-- projectDetail.ejs -->
+<style>
+  body {
+    padding: 0;
+    margin: 0;
+    font-family: sans-serif;
+    font-family: "Roboto", sans-serif;
+    font-family: "Poppins", sans-serif;
+    display: grid;
+    place-items: center;
+  }
 
+  ul {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  li {
+    display: flex;
+    margin-left: -40px;
+    list-style: none;
+    gap: 20px;
+  }
+
+  li div:nth-child(1) {
+    padding: 10px;
+    width: 400px;
+    background-color: white;
+    box-shadow: 0px 0px 10px 1px rgba(0, 0, 0, 0.301);
+    border-radius: 10px;
+  }
+
+  li div:nth-child(1) h3 {
+    font-weight: 500;
+    margin-top: -12px;
+    text-align: center;
+  }
+
+  li div:nth-child(1) p {
+    color: rgb(70, 70, 70);
+  }
+
+  li div:nth-child(2) {
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px 1px #0000004d;
+  }
+
+  .status {
+    color: white;
+  }
+
+  .issue_and_search {
+    width: 100%;
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center;
+    gap: 20px;
+    justify-content: space-between;
+  }
+
+  .search_filter {
+    align-self: start;
+  }
+
+  .issue-container {
+    align-self: start;
+  }
+
+  #search-form input[type="text"] {
+    width: 80%;
+    font-size: 15px;
+    font-weight: 500;
+    font-family: "Roboto", sans-serif;
+    font-family: "Poppins", sans-serif;
+    box-sizing: border-box;
+  }
+  #search-form input[type="text"]:focus {
+    outline: 2px solid #ff9100;
+  }
+
+  #search-form input[type="text"],
+  #search-form button {
+    border: 1px solid #ff9900;
+    border-radius: 5px;
+    padding: 0.6em 1.2em;
+  }
+  #search-form button {
+    font-size: 1em;
+    color: white;
+    background-color: #ff9900;
+  }
+
+  .project-detail {
+    text-align: center;
+  }
+
+  .project-detail div {
+    margin: 1rem 0;
+    border-radius: 10px;
+    width: 100%;
+    background-color: #ff9900;
+  }
+
+  .project-detail div h1 {
+    text-shadow: 2px 1px 1px white;
+  }
+
+  .project-detail div .desc {
+    color: #303030;
+  }
+
+  .project-detail div .author-name {
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
+    margin: auto;
+    padding: 0.5em 1em;
+    width: max-content;
+    background-color: white;
+    color: #ff9100;
+    font-weight: 500;
+  }
+
+  #hamburger {
+    display: none;
+  }
+
+  .displayHam {
+    display: block;
+  }
+  /* BUTTON */
+
+  .btn {
+    position: fixed;
+    right: 80px;
+    bottom: 50px;
+  }
+
+  .btn a {
+    background-color: #0099ff;
+    border-radius: 5px;
+    width: fit-content;
+    padding: 1rem 1.2rem;
+    color: #d3d3d3;
+    text-decoration: none;
+  }
+
+  .btn a:hover {
+    color: #fff;
+    background-color: #006eff;
+  }
+
+  /* filter button */
+  .filter-btn {
+    background-color: #ff9100;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    padding: 0.7rem 1.2rem;
+    font-weight: 500;
+    font-size: 1.2em;
+    cursor: pointer;
+  }
+
+  /* MEDIA QUERIES */
+
+  @media (max-width: 764px) {
+    .project-detail div {
+      width: 650px;
+    }
+    .project-detail div h1 {
+      text-shadow: none;
+      font-size: 1.4em;
+    }
+    .project-detail div .desc {
+      color: white;
+      font-size: 1em;
+    }
+    .project-detail div .author-name {
+      font-size: 0.9em;
+    }
+
+    #search-form input[type="text"] {
+      width: 70%;
+      font-family: "Roboto", sans-serif;
+      font-family: "Poppins", sans-serif;
+      box-sizing: border-box;
+    }
+
+    .issue-container ul {
+      margin-right: 40px;
+    }
+    .issue-container ul li {
+      display: block;
+      font-size: 0.8em;
+      margin-left: 0;
+      border: 1px solid;
+      border-radius: 10px;
+    }
+
+    .issue-container ul li div:nth-child(1) {
+      border-bottom-left-radius: 0;
+      border-bottom-right-radius: 0;
+      box-shadow: none;
+      width: 250px;
+    }
+
+    .issue-container ul li div:nth-child(2) {
+      border-radius: 0;
+      padding: 2px 10px;
+      width: fit-content;
+      box-shadow: none;
+    }
+  }
+
+  @media (max-width: 580px) {
+    .project-detail div {
+      width: 350px;
+    }
+    .project-detail div h1 {
+      text-shadow: none;
+      font-size: 1.2em;
+    }
+    .project-detail div .desc {
+      color: white;
+      font-size: 0.8em;
+    }
+    .project-detail div .author-name {
+      font-size: 0.9em;
+    }
+
+    #hamburger {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      width: 25px;
+      height: 18px;
+      padding: 5px;
+      border: 1px solid;
+      border-radius: 5px;
+      float: right;
+    }
+    #hamburger:hover {
+      cursor: pointer;
+    }
+
+    #hamburger div {
+      width: 25px;
+      height: 3px;
+      background-color: black;
+      border-radius: 5px;
+    }
+
+    .issue_and_search {
+      display: block;
+    }
+
+    #search_filter_id {
+      display: none;
+    }
+
+    #search-form input[type="text"] {
+      width: 60%;
+    }
+
+    #search-form button {
+      font-size: 1em;
+    }
+
+    ul {
+      margin-right: 40px;
+    }
+    .issue-container ul li {
+      display: block;
+      font-size: 0.8em;
+      margin-left: 0;
+      border: 1px solid;
+      border-radius: 10px;
+      width: 300px;
+    }
+
+    .issue-container ul li div:nth-child(1) {
+      border-bottom-left-radius: 0;
+      border-bottom-right-radius: 0;
+      width: 93%;
+      box-shadow: none;
+    }
+
+    .issue-container ul li div:nth-child(2) {
+      border-radius: 0;
+      padding: 2px 10px;
+      width: fit-content;
+      box-shadow: none;
+    }
+    .btn {
+      right: 10px;
+      bottom: 20px;
+    }
+
+    .btn a {
+      padding: 0.7rem 1rem;
+    }
+
+    /* filter button */
+    .filter-btn {
+      padding: 0.5rem 1rem;
+      font-weight: 5=400;
+      font-size: 1em;
+    }
+  }
+</style>
 <div class="project-detail">
   <div>
     <h1><%= project.name %></h1>
