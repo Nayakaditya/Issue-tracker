@@ -3,7 +3,7 @@
 <div class="project-container">
   <% for (const project of projects) { %>
   <div class="project-detail">
-    <div class="project-author" title="Author">
+    <div class="project-author" title="<%= project.author %>">
       <h2 class="author_name"><%= project.author %></h2>
     </div>
     <div class="project">

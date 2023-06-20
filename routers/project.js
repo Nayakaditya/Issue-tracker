@@ -24,4 +24,9 @@ router.post("/:projectId/delete", projectController.deleteProject);
 
 // Route for page issue form
 router.get("/:projectId/issue_form", projectController.createIssueForm);
+
+// Router for Search Issues
+router.get("/:projectId/search", projectController.searchIssues);
+
+router.get("/:projectId/filter", projectController.filterIssues);
 module.exports = router;

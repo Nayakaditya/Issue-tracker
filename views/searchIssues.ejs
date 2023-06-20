@@ -1,0 +1,54 @@
+<link rel="stylesheet" href="../../details.css" />
+
+<div class="project-detail">
+  <div>
+    <h1><%= project.name %></h1>
+    <p class="desc"><%= project.description %></p>
+    <p class="author-name"><%= project.author %></p>
+  </div>
+</div>
+
+<div class="issue_and_search">
+  <div class="search_filter">
+    <form
+      id="search-form"
+      action="/project/<%= project._id %>/search"
+      method="get"
+    >
+      <input
+        type="text"
+        name="query"
+        placeholder="Search by author or description"
+        required
+      />
+      <button type="submit">
+        <i class="fa-solid fa-magnifying-glass"></i>
+      </button>
+    </form>
+  </div>
+  <div class="issue-container">
+    <ul>
+      <% issues.forEach((issue) => { %>
+      <li>
+        <div>
+          <h3><%= issue.name %></h3>
+          <p><%= issue.description %></p>
+          <p
+            style="
+              background-color: rgba(128, 128, 128, 0.322);
+              width: fit-content;
+              padding: 0 5px;
+              border-radius: 5px;
+            "
+          >
+            <%= issue.author %>
+          </p>
+        </div>
+        <div>
+          <p>Label: <%= issue.labels %></p>
+        </div>
+      </li>
+      <% }); %>
+    </ul>
+  </div>
+</div>

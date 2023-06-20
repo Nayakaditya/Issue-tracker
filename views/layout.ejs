@@ -30,6 +30,8 @@
     </style>
   </head>
   <body>
-    <%- body %> <%- script %>
+    <%- include('./components/header.ejs') %>
+    <div style="margin-top: 50px; max-width: 1200px;"><%- body %></div>
+    <%- script %>
   </body>
 </html>

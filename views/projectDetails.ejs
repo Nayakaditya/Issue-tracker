@@ -1,23 +1,4 @@
 <link rel="stylesheet" href="../details.css" />
-
-<style>
-  .status {
-    padding: 5px 10px;
-    border-radius: 4px;
-  }
-
-  .status.open {
-    background-color: green;
-  }
-
-  .status.inprogress {
-    background-color: yellow;
-  }
-
-  .status.closed {
-    background-color: red;
-  }
-</style>
 <!-- projectDetail.ejs -->
 
 <div class="project-detail">
@@ -28,65 +9,126 @@
   </div>
 </div>
 
-<!-- Search form -->
-<div class="search_filter">
-  <form
-    id="search-form"
-    action="/project/<%= project._id %>/search"
-    method="get"
-  >
-    <input
-      type="text"
-      name="query"
-      placeholder="Search by author or description"
-      required
-    />
-    <button type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
-  </form>
+<div id="hamburger">
+  <div class="ham"></div>
+  <div class="ham"></div>
+  <div class="ham"></div>
+</div>
+<div class="issue_and_search">
+  <!-- Search form -->
+  <div class="search_filter" id="search_filter_id">
+    <form
+      id="search-form"
+      action="/project/<%= project._id %>/search"
+      method="get"
+    >
+      <input
+        type="text"
+        name="query"
+        placeholder="Search by author or description"
+        required
+      />
+      <button type="submit">
+        <i class="fa-solid fa-magnifying-glass"></i>
+      </button>
+    </form>
 
-  <!-- Filter Form -->
-  <form
-    id="filter-form"
-    action="/project/<%= project._id %>/filter"
-    method="GET"
-  >
-    <label for="filter-labels">Filter by Labels:</label>
-    <select name="labels" id="filter-labels">
-      <option value="">All</option>
-      <option value="bug">Bug</option>
-      <option value="documentation">Documentation</option>
-      <option value="enhancement">Enhancement</option>
-      <option value="good first issue">Good First Issue</option>
-      <option value="help wanted">Help Wanted</option>
-      <option value="question">Question</option>
-      <option value="invalid">Invalid</option>
-      <option value="wontfix">Won't Fix</option>
-    </select>
-    <button type="submit"><i class="fa-solid fa-filter"></i></button>
-  </form>
+    <!-- Existing code for displaying issues -->
+    <div class="checks">
+      <form action="/project/<%= project._id %>/filter" method="GET">
+        <h4>Filter by Labels</h4>
+        <ul>
+          <li>
+            <label>
+              <input type="checkbox" name="labels" value="bug" /> Bug
+            </label>
+          </li>
+          <li>
+            <label>
+              <input type="checkbox" name="labels" value="documentation" />
+              Documentation
+            </label>
+          </li>
+          <li>
+            <label>
+              <input type="checkbox" name="labels" value="enhancement" />
+              Enhancement
+            </label>
+          </li>
+          <li>
+            <label>
+              <input type="checkbox" name="labels" value="help wanted" />
+              Help wanted
+            </label>
+          </li>
+          <li>
+            <label>
+              <input type="checkbox" name="labels" value="good first issue" />
+              Good first issue
+            </label>
+          </li>
+          <li>
+            <label>
+              <input type="checkbox" name="labels" value="question" />Question
+            </label>
+          </li>
+          <li>
+            <label>
+              <input type="checkbox" name="labels" value="wontfix" />Wontfix
+            </label>
+          </li>
+          <li>
+            <label>
+              <input type="checkbox" name="labels" value="invalid" />Invalid
+            </label>
+          </li>
+        </ul>
+        <!-- Add more checkboxes for other labels -->
 
-  <!-- Existing code for displaying issues -->
+        <button type="submit" class="filter-btn">Apply Filter</button>
+      </form>
+    </div>
+  </div>
+  <div class="issue-container">
+    <ul>
+      <% project.issues.forEach((issue) => { %>
+      <li>
+        <div>
+          <h3><%= issue.name %></h3>
+          <p><%= issue.description %></p>
+          <p
+            style="
+              background-color: rgba(128, 128, 128, 0.322);
+              width: fit-content;
+              padding: 0 5px;
+              border-radius: 5px;
+            "
+          >
+            <%= issue.author %>
+          </p>
+        </div>
+        <div>
+          <p>Label: <%= issue.labels %></p>
+        </div>
+      </li>
+      <% }); %>
+    </ul>
+  </div>
+
+  <div class="btn">
+    <a href="/project/<%= project.id %>/issue_form">Create Issue</a>
+  </div>
 </div>
 
-<h2>Issues</h2>
-<hr style="width: 100%; color: rgb(255, 255, 255)" />
-<ul>
-  <% project.issues.forEach((issue) => { %>
-  <li>
-    <h3><%= issue.name %></h3>
-    <p>Description: <%= issue.description %></p>
-    <p>Author: <%= issue.author %></p>
-    <p>Labels: <%= issue.labels %></p>
-    <p>
-      Status:
-      <span class="status <%= issue.status.toLowerCase() %>"
-        ><%= issue.status %></span
-      >
-    </p>
-  </li>
-  <% }); %>
-</ul>
+<script>
+  const hamburger = document.getElementById("hamburger");
+  const searchFilter = document.getElementById("search_filter_id");
 
-<div class="btn">
-  <a href="/project/<%= project.id %>/issue_form">Create Issue</a>
-</div>
+  hamburger.addEventListener("click", () => {
+    if (searchFilter.style.display === "none") {
+      searchFilter.style.display = "block";
+    } else {
+      searchFilter.style.display = "none";
+    }
+  });
+</script>

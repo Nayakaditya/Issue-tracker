@@ -64,7 +64,7 @@ module.exports.deleteProject = async (req, res) => {
 };
 
 // Controller for viewing project details and issues list
-exports.getProjectDetails = async (req, res) => {
+module.exports.getProjectDetails = async (req, res) => {
   const projectId = req.params.projectId;
 
   try {
@@ -77,9 +77,82 @@ exports.getProjectDetails = async (req, res) => {
       return;
     }
 
-    res.render("projectDetails", { title: "project detail", project });
+    return res.render("projectDetails", { title: "project detail", project });
   } catch (err) {
     console.log("Error retrieving project details:", err);
     res.redirect("/"); // Redirect to home page or appropriate error page
+  }
+};
+
+module.exports.searchIssues = async (req, res) => {
+  try {
+    const { projectId } = req.params;
+    const keyword = req.query.query;
+    const regex = new RegExp(keyword, "i");
+
+    const project = await Project.findById(projectId);
+
+    if (!project) {
+      res.json({
+        error: "Project not found",
+      });
+      return;
+    }
+
+    const issues = await Issue.find({
+      $and: [
+        {
+          $or: [
+            { author: { $regex: regex } },
+            { description: { $regex: regex } },
+          ],
+        },
+        { _id: { $in: project.issues } }, // Filter issues based on the project's issues
+      ],
+    });
+
+    if (issues.length == 0) {
+      res.send(
+        "<h1 style='color: orange; font-family:sans-serif; text-align:center;'>No result found</h1>"
+      );
+    }
+
+    return res.render("searchIssues", {
+      title: "Issue found",
+      project: project,
+      issues,
+    });
+  } catch (error) {
+    console.log(error);
+    res.redirect("/"); // Redirect to home page or appropriate error page
+  }
+};
+
+
+// Get project details and apply filters
+module.exports.filterIssues = async (req, res) => {
+  const projectId = req.params.projectId;
+  const filterLabels = req.query.labels; // Get the filter labels from the query parameters
+
+  try {
+    // Check if the project exists
+    const project = await Project.findById(projectId).populate({
+      path: "issues",
+      match: {
+        labels: { $in: filterLabels }, // Apply the filter on labels using $in operator
+      },
+    });
+
+    if (!project) {
+      console.log("Project not found");
+      res.redirect("/"); // Redirect to home page or appropriate error page
+      return;
+    }
+
+    console.log("Filtered issues:", project.issues);
+    res.render("projectDetails", { project, title : "filtered issues" });
+  } catch (err) {
+    console.log("Error retrieving project details:", err);
+    res.redirect("/");
   }
 };

@@ -13,7 +13,7 @@ body {
   margin: 120px auto;
 }
 
-#ifEmptyProject .projectText{
+#ifEmptyProject .projectText {
   font-weight: bold;
   color: #0099ff;
 }
@@ -39,8 +39,8 @@ a {
 }
 
 .project-detail .project-author h2 {
-  display: grid;
-  place-items: center;
+  cursor: default;
+
   width: 1.5em;
   height: 1.5em;
   padding: 5px;
@@ -95,7 +95,7 @@ a {
   z-index: 10;
 }
 
-.project-detail .project .del-btn-container a {
+.project-detail .project .del-btn-container form {
   padding: 0.5rem;
   display: grid;
   place-items: center;
@@ -104,6 +104,12 @@ a {
   color: white;
   background-color: #ff9900;
   border-radius: 50%;
+}
+.del-btn-container form button {
+  border: none;
+  background-color: transparent;
+  color: white;
+  cursor: pointer;
 }
 
 /* BUTTON */
@@ -125,4 +131,62 @@ a {
 .btn a:hover {
   color: #fff;
   background-color: #006eff;
+}
+
+@media (max-width: 664px) {
+  .project-container {
+    display: flex;
+  }
+
+  .project-container {
+    width: 450px;
+  }
+
+  .project-detail .project-author h2 {
+    width: 1.3em;
+    height: 1.3em;
+    font-size: 1em;
+  }
+
+  .project-detail .project .project-title a {
+    font-size: 1.2em;
+  }
+
+  .project-detail .project .project-description p {
+    font-size: 0.8em;
+  }
+  .btn a {
+    padding: 0.5rem 1rem;
+  }
+}
+@media (max-width: 480px) {
+  .project-container {
+    display: flex;
+
+    margin-left: 10px;
+  }
+  #ifEmptyProject {
+    font-size: 1.3em;
+    margin: 50px auto;
+  }
+  .project-container {
+    width: 340px;
+  }
+
+  .project-detail .project-author h2 {
+    width: 1.3em;
+    height: 1.3em;
+    font-size: 1em;
+  }
+
+  .project-detail .project .project-title a {
+    font-size: 1.2em;
+  }
+
+  .project-detail .project .project-description p {
+    font-size: 0.8em;
+  }
+  .btn a {
+    padding: 0.5rem 1rem;
+  }
 }
